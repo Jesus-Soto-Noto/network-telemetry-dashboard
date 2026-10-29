@@ -1,0 +1,324 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shannon Pulse — Centro de Control de Red</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+            <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+            <line x1="12" y1="20" x2="12.01" y2="20"></line>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h2>Shannon<span>Net</span></h2>
+          <span class="brand-badge">Control Hub</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">PRINCIPAL</div>
+        <a href="#" class="nav-item active" data-tab="overview">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span>Vista General</span>
+        </a>
+        <a href="#routers-section" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+          <span>Mis Routers (3)</span>
+          <span class="nav-badge green-glow">3</span>
+        </a>
+        <a href="#devices-section" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+          <span>Dispositivos</span>
+          <span class="nav-badge" id="sidebar-device-count">0</span>
+        </a>
+
+        <div class="nav-section-label">HERRAMIENTAS</div>
+        <a href="http://192.168.10.1" target="_blank" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          <span>Panel Imou HX21</span>
+        </a>
+        <a href="http://192.168.10.2" target="_blank" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          <span>Panel Mercusys API</span>
+        </a>
+        <a href="http://192.168.10.12" target="_blank" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          <span>Panel Tenda Cuarto</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="ai-assistant-card">
+          <div class="ai-status">
+            <span class="pulse-dot"></span>
+            <span>Antigravity AI Activo</span>
+          </div>
+          <p>Tu asistente monitorea y sincroniza los cambios de red en tiempo real.</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="header-left">
+          <div class="page-title">
+            <h1>Monitoreo de Red Doméstica</h1>
+            <p>Ecosistema unificado: Imou HX21 • Mercusys • Tenda</p>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="device-search" placeholder="Buscar por nombre, IP o MAC...">
+          </div>
+
+          <button id="refresh-btn" class="btn-primary" title="Refrescar estado en vivo">
+            <svg class="spin-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            <span>Escanear Red</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Key Metrics Row (Matching Image 3) -->
+      <section class="metrics-grid">
+        <!-- Metric 1: Fibra Óptica WAN -->
+        <div class="metric-card card-accent-green">
+          <div class="metric-header">
+            <div class="metric-icon-box green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            </div>
+            <span class="badge-pill green">600 MB Fibra</span>
+          </div>
+          <div class="metric-body">
+            <span class="metric-label">Velocidad Contratada</span>
+            <div class="metric-value-row">
+              <h2 class="metric-number">600 <span class="metric-unit">Mbps</span></h2>
+            </div>
+            <div class="metric-footer">
+              <span class="status-indicator online"></span>
+              <span class="subtext">Latencia Internet: <strong id="wan-latency">-- ms</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric 2: Equipos Conectados -->
+        <div class="metric-card">
+          <div class="metric-header">
+            <div class="metric-icon-box blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <span class="badge-pill blue" id="active-percentage">100% Online</span>
+          </div>
+          <div class="metric-body">
+            <span class="metric-label">Dispositivos en Casa</span>
+            <div class="metric-value-row">
+              <h2 class="metric-number" id="online-count">0 <span class="metric-unit">activos</span></h2>
+            </div>
+            <div class="metric-footer">
+              <span class="subtext">Total registrados: <strong id="total-count">0</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric 3: Routers en Cascada -->
+        <div class="metric-card">
+          <div class="metric-header">
+            <div class="metric-icon-box purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+            </div>
+            <span class="badge-pill green">3 / 3 En Línea</span>
+          </div>
+          <div class="metric-body">
+            <span class="metric-label">Ecosistema Wi-Fi</span>
+            <div class="metric-value-row">
+              <h2 class="metric-number">3 <span class="metric-unit">Puntos AP</span></h2>
+            </div>
+            <div class="metric-footer">
+              <span class="subtext">Redes: <strong>Core_5G &bull; AP_Oficina &bull; AP_Lab</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric 4: Seguridad & DNS -->
+        <div class="metric-card">
+          <div class="metric-header">
+            <div class="metric-icon-box yellow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <span class="badge-pill yellow">Cloudflare & Google</span>
+          </div>
+          <div class="metric-body">
+            <span class="metric-label">DNS Rápido & DHCP</span>
+            <div class="metric-value-row">
+              <h2 class="metric-number">1.1.1.1 <span class="metric-unit">DNS</span></h2>
+            </div>
+            <div class="metric-footer">
+              <span class="subtext">Secundario: <strong>8.8.8.8</strong> (Cero colisiones)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Routers Topology Row -->
+      <section class="section-container" id="routers-section">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2>Puntos de Acceso y Routers</h2>
+            <p>Acceso directo y estado en vivo de cada equipo en la casa</p>
+          </div>
+          <div class="badge-group">
+            <span class="badge-pill outline"><span class="pulse-dot mini green"></span> Red Unificada 192.168.10.x</span>
+          </div>
+        </div>
+
+        <div class="routers-grid" id="routers-cards-container">
+          <!-- Dynamically populated or static placeholders -->
+        </div>
+      </section>
+
+      <!-- Connected Devices Table Section (Matching Image 3 table style) -->
+      <section class="section-container" id="devices-section">
+        <div class="section-header devices-header-flex">
+          <div class="section-title-wrap">
+            <h2>Dispositivos en la Red <span class="drag-instruction-badge">⠿ Arrastra para ordenar</span></h2>
+            <p>Monitoreo unificado de celulares, computadoras, televisores y consolas</p>
+          </div>
+
+          <!-- Dedicated Real-time Search Box for MAC, IP and Name -->
+          <div class="devices-search-container">
+            <div class="table-search-bar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="table-search" placeholder="Buscar MAC (ej: A6:CC o A6CC), IP o Nombre..." autocomplete="off">
+              <button id="clear-search-btn" class="btn-clear-search" title="Limpiar búsqueda" style="display: none;">&times;</button>
+            </div>
+            <span class="search-match-count" id="search-match-count"></span>
+          </div>
+
+          <div class="table-filter-tabs">
+            <button class="filter-tab active" data-filter="all">Todos (<span id="tab-all-count">0</span>)</button>
+            <button class="filter-tab" data-filter="online">En Línea (<span id="tab-online-count">0</span>)</button>
+            <button class="filter-tab" data-filter="unnamed">Por Nombrar (<span id="tab-unnamed-count">0</span>)</button>
+            <button class="filter-tab" data-filter="wifi5">5 GHz</button>
+            <button class="filter-tab" data-filter="wifi24">2.4 GHz</button>
+            <button class="filter-tab" data-filter="cable">Cable / AP</button>
+            <button class="btn-purge-offline" id="clear-offline-btn" title="Limpiar dispositivos desconectados del historial">🧹 Purgar Desconectados</button>
+          </div>
+        </div>
+
+        <!-- Devices Card Container -->
+        <div class="devices-card-container">
+          <div class="table-responsive">
+            <table class="devices-table">
+              <thead>
+                <tr>
+                  <th>DISPOSITIVO / APODO</th>
+                  <th>DIRECCIÓN IP</th>
+                  <th>DIRECCIÓN MAC</th>
+                  <th>CONECTADO MEDIANTE</th>
+                  <th>ESTADO</th>
+                  <th style="text-align: right;">GESTIÓN</th>
+                </tr>
+              </thead>
+              <tbody id="devices-table-body">
+                <tr>
+                  <td colspan="6" class="loading-state">
+                    <div class="loading-spinner"></div>
+                    <span>Escaneando dispositivos en vivo...</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Rename Device Modal -->
+  <div class="modal-overlay" id="rename-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <div class="modal-icon-bubble">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          </div>
+          <div>
+            <h3>Personalizar Dispositivo</h3>
+            <p>Se guardará en el panel y se sincronizará con el router Imou</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="close-modal">&times;</button>
+      </div>
+
+      <form id="rename-form">
+        <input type="hidden" id="edit-mac">
+
+        <div class="form-group">
+          <label>Nombre o Apodo Personalizado</label>
+          <input type="text" id="edit-name" placeholder="Ej: Celular de Mamá, TV Sala, Laptop Trabajo..." required>
+        </div>
+
+        <div class="form-group">
+          <label>Tipo de Dispositivo</label>
+          <div class="type-selector">
+            <label class="type-pill">
+              <input type="radio" name="edit-type" value="phone" checked>
+              <span>📱 Teléfono</span>
+            </label>
+            <label class="type-pill">
+              <input type="radio" name="edit-type" value="pc">
+              <span>💻 Computadora</span>
+            </label>
+            <label class="type-pill">
+              <input type="radio" name="edit-type" value="tv">
+              <span>📺 Smart TV</span>
+            </label>
+            <label class="type-pill">
+              <input type="radio" name="edit-type" value="router">
+              <span>📡 Router / AP</span>
+            </label>
+            <label class="type-pill">
+              <input type="radio" name="edit-type" value="other">
+              <span>🔌 Otro</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Notas Adicionales (Opcional)</label>
+          <input type="text" id="edit-notes" placeholder="Ej: Habitación secundaria, 5GHz preferido...">
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="cancel-modal">Cancelar</button>
+          <button type="submit" class="btn-primary" id="save-device-btn">
+            <span>Guardar y Sincronizar</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
